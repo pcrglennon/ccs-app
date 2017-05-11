@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :card_association_id, 'Association' %>
+    <%= form.collection_select :card_association_id, CardAssociation.all, :id, :name %>
+  </div>
+
+  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :card_name %>
   </div>

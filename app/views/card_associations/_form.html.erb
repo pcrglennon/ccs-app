@@ -1,0 +1,22 @@
+<%= form_with(model: card_association, local: true) do |form| %>
+  <% if card_association.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(card_association.errors.count, "error") %> prohibited this card_association from being saved:</h2>
+
+      <ul>
+      <% card_association.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :card_association_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
