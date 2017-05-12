@@ -7,7 +7,8 @@
     <tr>
       <th>Name</th>
       <th>Annual fee</th>
-      <th>Association</th>
+      <th>Network</th>
+      <th>Bank</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,8 +17,9 @@
     <% @cards.each do |card| %>
       <tr>
         <td><%= card.name %></td>
-        <td><%= number_to_currency(card.annual_fee_cents / 100) %></td>
-        <td><%= card.card_association.name %></td>
+        <td><%= humanized_money_with_symbol(card.annual_fee) %></td>
+        <td><%= card.network.name %></td>
+        <td><%= card.bank.try(:name) %></td>
         <td><%= link_to 'Show', card %></td>
         <td><%= link_to 'Edit', edit_card_path(card) %></td>
         <td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>

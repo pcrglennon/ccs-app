@@ -6,9 +6,21 @@
 </p>
 
 <p>
-  <strong>Annual fee cents:</strong>
-  <%= @card.annual_fee_cents %>
+  <strong>Annual fee:</strong>
+  <%= humanized_money_with_symbol(@card.annual_fee) %>
 </p>
+
+<p>
+  <strong>Network:</strong>
+  <%= link_to @card.network.name, network_path(@card.network.id) %>
+</p>
+
+<% if @card.bank.present? %>
+  <p>
+    <strong>Bank:</strong>
+    <%= link_to @card.bank.name, bank_path(@card.bank) %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
 <%= link_to 'Back', cards_path %>
