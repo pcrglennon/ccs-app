@@ -1,0 +1,27 @@
+<%= form_with(model: reward_currency, local: true) do |form| %>
+  <% if reward_currency.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(reward_currency.errors.count, "error") %> prohibited this reward_currency from being saved:</h2>
+
+      <ul>
+      <% reward_currency.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :reward_currency_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :value_cents, 'Value (¢)' %>
+    <%= form.text_field :value_cents, id: :reward_currency_value_cents %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

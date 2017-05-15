@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Spend Categories</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @spend_categories.each do |spend_category| %>
+      <tr>
+        <td><%= spend_category.name %></td>
+        <td><%= link_to 'Show', spend_category %></td>
+        <td><%= link_to 'Edit', edit_spend_category_path(spend_category) %></td>
+        <td><%= link_to 'Destroy', spend_category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Spend Category', new_spend_category_path %>

@@ -22,5 +22,20 @@
   </p>
 <% end %>
 
+<% if @card.rewards.present? %>
+  <div>
+    <h3>Rewards:</h3>
+
+    <% @card.rewards.each do |reward| %>
+      <p>
+        <%= "#{reward.percentage}%" %>
+        back on
+        <%= reward.spend_category.try(:name) || 'everything' %>
+        <strong>(<%= reward.reward_currency.name %>)</strong>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_card_path(@card) %> |
 <%= link_to 'Back', cards_path %>

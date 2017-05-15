@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @reward_currency.name %>
+</p>
+
+<p>
+  <strong>Value (¢):</strong>
+  <%= @reward_currency.value_cents %>
+</p>
+
+<%= link_to 'Edit', edit_reward_currency_path(@reward_currency) %> |
+<%= link_to 'Back', reward_currencies_path %>

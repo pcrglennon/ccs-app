@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Reward Currencies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value (¢)</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reward_currencies.each do |reward_currency| %>
+      <tr>
+        <td><%= reward_currency.name %></td>
+        <td><%= reward_currency.value_cents %></td>
+        <td><%= link_to 'Show', reward_currency %></td>
+        <td><%= link_to 'Edit', edit_reward_currency_path(reward_currency) %></td>
+        <td><%= link_to 'Destroy', reward_currency, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reward Currency', new_reward_currency_path %>

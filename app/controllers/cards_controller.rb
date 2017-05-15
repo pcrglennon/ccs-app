@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
+  before_action :build_blank_reward, only: [:new, :edit]
 
   # GET /cards
   # GET /cards.json
@@ -67,8 +68,17 @@ class CardsController < ApplicationController
       @card = Card.find(params[:id])
     end
 
+    def build_blank_reward
+      @card.rewards.build(percentage: 0.0) if @card.rewards.empty?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_params
-      params.require(:card).permit(:name, :annual_fee, :network_id, :bank_id)
+      params.require(:card).permit(:name,
+        :annual_fee,
+        :network_id,
+        :bank_id,
+        rewards_attributes: [:percentage, :spend_category_id, :reward_currency_id, :id, :_destroy]
+      )
     end
 end
