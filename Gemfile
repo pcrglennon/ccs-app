@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'money-rails', '~>1'
 
+gem "react_on_rails", "~> 7"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

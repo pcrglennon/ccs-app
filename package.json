@@ -1,5 +1,12 @@
 {
-  "name": "backend",
+  "name": "ccs-app",
+  "version": "0.0.1",
   "private": true,
-  "dependencies": {}
+  "engines": {
+    "node": "6.9.0",
+    "npm": "4.1.1"
+  },
+  "scripts": {
+    "postinstall": "cd client && yarn install"
+  }
 }
