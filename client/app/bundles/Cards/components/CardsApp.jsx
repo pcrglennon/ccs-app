@@ -1,12 +1,12 @@
 import React from 'react';
 
+import CardsListContainer from '../containers/CardsListContainer';
+
 export default class CardsApp extends React.Component {
   render() {
     return (
       <div>
-        <h3>
-          (Root Component)
-        </h3>
+        <CardsListContainer />
       </div>
     );
   }
