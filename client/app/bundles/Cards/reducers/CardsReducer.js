@@ -1,9 +1,36 @@
-const initialState = [];
+import * as actionTypes from '../constants/cardsConstants';
+
+const initialState = {
+  cards: [],
+  isFetching: false,
+  fetchErrorMessage: null
+};
 
 export default function cardsReducer(state = initialState, action) {
-  const { type, name } = action;
+  const { type, cards, error } = action;
 
   switch (type) {
+    case actionTypes.FETCH_CARDS_SUCCESS: {
+      return Object.assign({}, state, {
+        cards: cards,
+        fetchErrorMessage: null,
+        isFetching: false
+      });
+    }
+
+    case actionTypes.FETCH_CARDS_ERROR: {
+      return Object.assign({}, state, {
+        fetchErrorMessage: error,
+        isFetching: false
+      });
+    }
+
+    case actionTypes.FETCH_CARDS_BEGIN: {
+      return Object.assign({}, state, {
+        isFetching: true
+      });
+    }
+
     default:
       return state;
   }

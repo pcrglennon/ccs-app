@@ -5,7 +5,8 @@ import CardsList from '../components/CardsList';
 
 function mapStateToProps(state) {
   return {
-    cards: state.cards
+    cards: state.cardsStore.cards,
+    isFetching: state.cardsStore.isFetching
   };
 }
 
@@ -13,14 +14,9 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
-class CardsListContainer extends React.Component {
-  render() {
-    const { cards } = this.props;
+const CardsListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardsList);
 
-    return (
-      <CardsList {...{ cards }}/>
-    );
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CardsListContainer);
+export default CardsListContainer;

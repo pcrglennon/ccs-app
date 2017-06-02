@@ -1,20 +1,32 @@
 import React from 'react';
-import { combineReducers, applyMiddleware, createStore } from 'redux';
+import { combineReducers, applyMiddleware, createStore, compose } from 'redux';
+// import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import middleware from 'redux-thunk';
 
+import { fetchCards } from '../actions/cardsActions';
 import reducers from '../reducers/index';
-
 import CardsAppContainer from '../containers/CardsAppContainer';
 
-export default (props) => {
-  const combinedReducer = combineReducers(reducers);
+const combinedReducer = combineReducers(reducers);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  combinedReducer,
+  composeEnhancers(
+    applyMiddleware(thunk)
+  )
+);
 
-  const store = applyMiddleware(middleware)(createStore)(combinedReducer);
+export default class CardsApp extends React.Component {
+  componentDidMount() {
+    store.dispatch(fetchCards());
+  }
 
-  return (
-    <Provider store={store}>
-      <CardsAppContainer />
-    </Provider>
-  );
+  render() {
+    return (
+      <Provider store={store}>
+        <CardsAppContainer />
+      </Provider>
+    );
+  }
 }

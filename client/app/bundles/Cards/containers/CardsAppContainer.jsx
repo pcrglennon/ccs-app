@@ -3,10 +3,6 @@ import { connect } from 'react-redux';
 
 import CardsApp from '../components/CardsApp';
 
-const CardsAppContainer = () => (
-  <CardsApp />
-);
-
 function mapStateToProps(state) {
   return {};
 }
@@ -15,4 +11,9 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CardsAppContainer);
+const CardsAppContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardsApp);
+
+export default CardsAppContainer;
