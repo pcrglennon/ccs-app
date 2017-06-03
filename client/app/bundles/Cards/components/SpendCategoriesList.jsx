@@ -1,40 +1,55 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class SpendCategoriesList extends React.Component {
-  renderIsFetching() {
-    return (
-      <p>Fetching SpendCategories...</p>
-    );
+import SpendCategory from './SpendCategory';
+
+class SpendCategoriesList extends React.Component {
+  renderFetchingMessage() {
+    if (this.props.isFetching) {
+      return (
+        <p>Fetching SpendCategories...</p>
+      );
+    } else { return null; }
   }
 
   renderFetchErrorMessage() {
-    return (
-      <p>Error: {this.props.fetchErrorMessage}</p>
-    );
+    if (this.props.fetchErrorMessage) {
+      return (
+        <p>Error: {this.props.fetchErrorMessage}</p>
+      );
+    } else { return null; }
   }
 
   renderSpendCategories() {
-    return (
-      <p>Total # of SpendCategories {this.props.spendCategories.length}</p>
-    );
-  }
-
-  renderContent() {
-    if (this.props.isFetching) {
-      return this.renderIsFetching();
-    } else if (this.props.fetchErrorMessage) {
-      return this.renderFetchErrorMessage();
-    } else {
-      return this.renderSpendCategories();
-    }
+    return this.props.spendCategories.map((spendCategory) => {
+      return (
+        <SpendCategory
+          key={spendCategory.id}
+          {...spendCategory}
+        />
+      );
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className="spend-categories-list">
         <h3>SpendCategoriesList</h3>
-        {this.renderContent()}
+        {this.renderFetchingMessage()}
+        {this.renderFetchErrorMessage()}
+        {this.renderSpendCategories()}
       </div>
     );
   }
 }
+
+SpendCategoriesList.propTypes = {
+  spendCategories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  fetchErrorMessage: PropTypes.string.isRequired
+};
+
+export default SpendCategoriesList;

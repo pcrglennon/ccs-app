@@ -1,40 +1,55 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class CardsList extends React.Component {
-  renderIsFetching() {
-    return (
-      <p>Fetching Cards...</p>
-    );
+import Card from './Card';
+
+class CardsList extends React.Component {
+  renderFetchingMessage() {
+    if (this.props.isFetching) {
+      return (
+        <p>Fetching Cards...</p>
+      );
+    } else { return null; }
   }
 
   renderFetchErrorMessage() {
-    return (
-      <p>Error: {this.props.fetchErrorMessage}</p>
-    );
+    if (this.props.fetchErrorMessage) {
+      return (
+        <p>Error: {this.props.fetchErrorMessage}</p>
+      );
+    } else { return null; }
   }
 
   renderCards() {
-    return (
-      <p>Total # of cards {this.props.cards.length}</p>
-    );
-  }
-
-  renderContent() {
-    if (this.props.isFetching) {
-      return this.renderIsFetching();
-    } else if (this.props.fetchErrorMessage) {
-      return this.renderFetchErrorMessage();
-    } else {
-      return this.renderCards();
-    }
+    return this.props.cards.map((card) => {
+      return (
+        <Card
+          key={card.id}
+          {...card}
+        />
+      );
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className="cards-list">
         <h3>CardsList</h3>
-        {this.renderContent()}
+        {this.renderFetchingMessage()}
+        {this.renderFetchErrorMessage()}
+        {this.renderCards()}
       </div>
     );
   }
 }
+
+CardsList.propTypes = {
+  cards: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  fetchErrorMessage: PropTypes.string.isRequired
+};
+
+export default CardsList;

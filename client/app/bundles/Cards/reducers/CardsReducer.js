@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/cardsConstants';
 const initialState = {
   cards: [],
   isFetching: false,
-  fetchErrorMessage: null
+  fetchErrorMessage: ''
 };
 
 export default function cardsReducer(state = initialState, action) {
@@ -13,7 +13,7 @@ export default function cardsReducer(state = initialState, action) {
     case actionTypes.FETCH_CARDS_SUCCESS: {
       return Object.assign({}, state, {
         cards: cards,
-        fetchErrorMessage: null,
+        fetchErrorMessage: '',
         isFetching: false
       });
     }

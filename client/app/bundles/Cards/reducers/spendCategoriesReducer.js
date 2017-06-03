@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/spendCategoriesConstants';
 const initialState = {
   spendCategories: [],
   isFetching: false,
-  fetchErrorMessage: null
+  fetchErrorMessage: ''
 };
 
 export default function spendCategoriesReducer(state = initialState, action) {
@@ -13,7 +13,7 @@ export default function spendCategoriesReducer(state = initialState, action) {
     case actionTypes.FETCH_SPEND_CATEGORIES_SUCCESS: {
       return Object.assign({}, state, {
         spendCategories: spendCategories,
-        fetchErrorMessage: null,
+        fetchErrorMessage: '',
         isFetching: false
       });
     }
