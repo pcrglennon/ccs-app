@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default class CardsList extends React.Component {
+export default class SpendCategoriesList extends React.Component {
   renderIsFetching() {
     return (
-      <p>Fetching Cards...</p>
+      <p>Fetching SpendCategories...</p>
     );
   }
 
@@ -13,9 +13,9 @@ export default class CardsList extends React.Component {
     );
   }
 
-  renderCards() {
+  renderSpendCategories() {
     return (
-      <p>Total # of cards {this.props.cards.length}</p>
+      <p>Total # of SpendCategories {this.props.spendCategories.length}</p>
     );
   }
 
@@ -25,14 +25,14 @@ export default class CardsList extends React.Component {
     } else if (this.props.fetchErrorMessage) {
       return this.renderFetchErrorMessage();
     } else {
-      return this.renderCards();
+      return this.renderSpendCategories();
     }
   }
 
   render() {
     return (
       <div>
-        <h3>CardsList</h3>
+        <h3>SpendCategoriesList</h3>
         {this.renderContent()}
       </div>
     );

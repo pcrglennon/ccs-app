@@ -1,5 +1,7 @@
 import cardsReducer from './cardsReducer';
+import spendCategoriesReducer from './spendCategoriesReducer';
 
 export default {
-  cardsStore: cardsReducer
+  cardsStore: cardsReducer,
+  spendCategoriesStore: spendCategoriesReducer
 };

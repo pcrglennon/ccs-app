@@ -1,7 +1,7 @@
 import ReactOnRails from 'react-on-rails';
 
-import CardsApp from './CardsApp';
+import App from './App';
 
 ReactOnRails.register({
-  CardsApp
+  App
 });

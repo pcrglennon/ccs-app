@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import CardsApp from '../components/CardsApp';
+import App from '../components/App';
 
 function mapStateToProps(state) {
   return {};
@@ -11,9 +11,9 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
-const CardsAppContainer = connect(
+const AppContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CardsApp);
+)(App);
 
-export default CardsAppContainer;
+export default AppContainer;

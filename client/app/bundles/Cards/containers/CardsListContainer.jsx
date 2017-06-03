@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 
 import CardsList from '../components/CardsList';
@@ -6,7 +5,8 @@ import CardsList from '../components/CardsList';
 function mapStateToProps(state) {
   return {
     cards: state.cardsStore.cards,
-    isFetching: state.cardsStore.isFetching
+    isFetching: state.cardsStore.isFetching,
+    fetchErrorMessage: state.cardsStore.fetchErrorMessage
   };
 }
 
