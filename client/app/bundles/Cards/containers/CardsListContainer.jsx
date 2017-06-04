@@ -4,7 +4,7 @@ import CardsList from '../components/CardsList';
 
 function mapStateToProps(state) {
   return {
-    cards: state.cardsStore.cards,
+    cards: Object.values(state.cardsStore.byId),
     isFetching: state.cardsStore.isFetching,
     fetchErrorMessage: state.cardsStore.fetchErrorMessage
   };

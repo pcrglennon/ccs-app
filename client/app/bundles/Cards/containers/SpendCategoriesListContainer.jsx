@@ -4,7 +4,7 @@ import SpendCategoriesList from '../components/SpendCategoriesList';
 
 function mapStateToProps(state) {
   return {
-    spendCategories: state.spendCategoriesStore.spendCategories,
+    spendCategories: Object.values(state.spendCategoriesStore.byId),
     isFetching: state.spendCategoriesStore.isFetching,
     fetchErrorMessage: state.spendCategoriesStore.fetchErrorMessage
   };
