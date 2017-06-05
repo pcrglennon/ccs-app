@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SpendResultContainer from '../containers/SpendResultContainer';
+
 class Reward extends React.Component {
   render() {
     return (
       <div className="reward">
-        <p>Category: {this.props.spendCategory.name}</p>
+        <p>
+          {this.props.percentage}% back on <em>{this.props.spendCategory.name}</em>:
+        </p>
 
-        <p>% back: {this.props.percentage}</p>
+        <SpendResultContainer {...this.props} />
       </div>
     );
   }
