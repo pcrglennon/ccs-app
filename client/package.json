@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build:test": "webpack --config webpack.config.js",
-    "build:production": "NODE_ENV=production webpack --config webpack.config.js",
-    "build:development": "webpack -w --config webpack.config.js"
+    "build:production": "NODE_ENV=production webpack --config webpack.config.js --display-error-details",
+    "build:development": "webpack -w --config webpack.config.js --display-error-details"
   },
   "dependencies": {
     "babel-cli": "^6.24.1",
