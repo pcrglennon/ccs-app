@@ -1,6 +1,6 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
-  before_action :build_blank_reward, only: [:new, :edit]
+  before_action :build_blank_reward, only: [:edit]
 
   # GET /cards
   # GET /cards.json
@@ -16,6 +16,7 @@ class CardsController < ApplicationController
   # GET /cards/new
   def new
     @card = Card.new
+    @card.rewards.build(percentage: 0.0)
   end
 
   # GET /cards/1/edit
