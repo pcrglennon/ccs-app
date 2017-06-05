@@ -11,10 +11,6 @@
     "build:production": "NODE_ENV=production webpack --config webpack.config.js",
     "build:development": "webpack -w --config webpack.config.js"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-  ],
   "dependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
