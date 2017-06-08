@@ -4,22 +4,6 @@ import PropTypes from 'prop-types';
 import SpendCategory from './SpendCategory';
 
 class SpendCategoriesList extends React.Component {
-  renderFetchingMessage() {
-    if (this.props.isFetching) {
-      return (
-        <p>Fetching SpendCategories...</p>
-      );
-    } else { return null; }
-  }
-
-  renderFetchErrorMessage() {
-    if (this.props.fetchErrorMessage) {
-      return (
-        <p>Error: {this.props.fetchErrorMessage}</p>
-      );
-    } else { return null; }
-  }
-
   renderSpendCategories() {
     return this.props.spendCategories.map((spendCategory) => {
       return (
@@ -35,8 +19,7 @@ class SpendCategoriesList extends React.Component {
     return (
       <div className="spend-categories-list">
         <h3>SpendCategoriesList</h3>
-        {this.renderFetchingMessage()}
-        {this.renderFetchErrorMessage()}
+
         {this.renderSpendCategories()}
       </div>
     );
@@ -46,9 +29,7 @@ class SpendCategoriesList extends React.Component {
 SpendCategoriesList.propTypes = {
   spendCategories: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired
-  }).isRequired).isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  fetchErrorMessage: PropTypes.string.isRequired
+  }).isRequired).isRequired
 };
 
 export default SpendCategoriesList;

@@ -32,7 +32,12 @@ export function fetchSpendCategories() {
 
     return fetch(request)
       .then((response) => response.json())
-      .then((json) => dispatch(fetchSpendCategoriesSuccess(json)))
-      .catch((error) => dispatch(fetchSpendCategoriesError(error)));
+      .then((json) => {
+        if (json.error) {
+          dispatch(fetchSpendCategoriesError(json.error));
+        } else {
+          dispatch(fetchSpendCategoriesSuccess(json));
+        }
+      });
   };
 }

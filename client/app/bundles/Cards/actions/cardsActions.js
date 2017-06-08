@@ -32,7 +32,12 @@ export function fetchCards() {
 
     return fetch(request)
       .then((response) => response.json())
-      .then((json) => dispatch(fetchCardsSuccess(json)))
-      .catch((error) => dispatch(fetchCardsError(error)));
+      .then((json) => {
+        if (json.error) {
+          dispatch(fetchCardsError(json.error));
+        } else {
+          dispatch(fetchCardsSuccess(json));
+        }
+      });
   };
 }
