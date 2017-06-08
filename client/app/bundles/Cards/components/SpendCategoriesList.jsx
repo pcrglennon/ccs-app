@@ -45,8 +45,7 @@ class SpendCategoriesList extends React.Component {
 
 SpendCategoriesList.propTypes = {
   spendCategories: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired
+    id: PropTypes.number.isRequired
   }).isRequired).isRequired,
   isFetching: PropTypes.bool.isRequired,
   fetchErrorMessage: PropTypes.string.isRequired

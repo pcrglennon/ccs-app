@@ -40,10 +40,8 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   rewards: PropTypes.arrayOf(PropTypes.shape({
-    spend_category_id: PropTypes.number.isRequired,
-    reward_currency_id: PropTypes.number.isRequired,
-    percentage: PropTypes.string.isRequired
-  }).isRequired).isRequired,
+    id: PropTypes.number.isRequired
+  }).isRequired).isRequired
 };
 
 export default Card;
