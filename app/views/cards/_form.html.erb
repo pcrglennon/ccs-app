@@ -31,22 +31,17 @@
     <%= form.collection_select :bank_id, Bank.all, :id, :name, include_blank: '(None)' %>
   </div>
 
-  <div>
-    <h4>Rewards</h4>
+  <h4>Rewards</h4>
 
+  <div id="rewards">
     <%= form.fields_for :rewards do |reward_fields| %>
-      <%= reward_fields.label :percentage, 'Percent back* (0.00 - 100.00)' %>
-      <%= reward_fields.number_field :percentage, step: 0.01 %>
-
-      <%= reward_fields.label :spend_category_id, 'Spend Category*' %>
-      <%= reward_fields.collection_select :spend_category_id, SpendCategory.all, :id, :name, include_blank: '(Anything)' %>
-
-      <%= reward_fields.label :reward_currency_id, 'Currency*' %>
-      <%= reward_fields.collection_select :reward_currency_id, RewardCurrency.all, :id, :name %>
+      <%= render partial: 'reward_fields', locals: { f: reward_fields } %>
     <% end %>
   </div>
 
-  <div class="actions">
+  <%= link_to_add_association 'Add Reward', form, :rewards, data: { association_insertion_node: '#rewards', association_insertion_method: 'append' } %>
+
+  <div class="actions" style="margin-top: 40px;">
     <%= form.submit %>
   </div>
 <% end %>

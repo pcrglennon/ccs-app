@@ -1,6 +1,5 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
-  before_action :build_blank_reward, only: [:edit]
 
   # GET /cards
   # GET /cards.json
@@ -67,10 +66,6 @@ class CardsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_card
       @card = Card.find(params[:id])
-    end
-
-    def build_blank_reward
-      @card.rewards.build(percentage: 0.0) if @card.rewards.empty?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,14 @@
+<div class="fields fields--nested fields--rewards" style="margin: 20px 5px;">
+  <%= f.label :percentage, 'Percent back* (0.00 - 100.00)' %>
+  <%= f.number_field :percentage, step: 0.01 %>
+
+  <%= f.label :spend_category_id, 'Spend Category*' %>
+  <%= f.collection_select :spend_category_id, SpendCategory.all, :id, :name, include_blank: '(Anything)' %>
+
+  <%= f.label :reward_currency_id, 'Currency*' %>
+  <%= f.collection_select :reward_currency_id, RewardCurrency.all, :id, :name %>
+
+  <br/ >
+
+  <%= link_to_remove_association 'Remove', f, wrapper_class: 'fields--rewards__remove' %>
+</div>
