@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Card from './Card';
+import CardContainer from '../containers/CardContainer';
 
 class CardsList extends React.Component {
   renderCards() {
     return this.props.cards.map((card) => {
       return (
-        <Card
+        <CardContainer
           key={card.id}
           {...card}
         />

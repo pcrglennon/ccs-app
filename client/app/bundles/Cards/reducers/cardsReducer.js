@@ -1,7 +1,7 @@
 import * as actionTypes from '../constants/cardsConstants';
 
 const initialState = {
-  byId: [],
+  byId: {},
   isFetching: false,
   fetchErrorMessage: ''
 };

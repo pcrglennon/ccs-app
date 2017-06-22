@@ -20,9 +20,9 @@ class Reward extends React.Component {
 Reward.propTypes = {
   percentage: PropTypes.string.isRequired,
   spendCategory: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  rewardCurrency: PropTypes.object.isRequired
 };
 
 export default Reward;

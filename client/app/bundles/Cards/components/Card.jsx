@@ -37,7 +37,6 @@ class Card extends React.Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   rewards: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired
