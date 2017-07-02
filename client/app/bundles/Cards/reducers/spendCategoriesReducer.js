@@ -1,11 +1,8 @@
-import * as actionTypes from '../constants/spendCategoriesConstants';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  byId: {},
-  isFetching: false,
-  fetchErrorMessage: ''
-};
+import * as initializeActionTypes from '../constants/initializeConstants';
 
+// TODO - refactor!
 function buildIdMap(spendCategoriesArray) {
   return spendCategoriesArray.reduce((object, spendCategory) => {
     object[spendCategory.id] = spendCategory;
@@ -13,32 +10,19 @@ function buildIdMap(spendCategoriesArray) {
   }, {});
 }
 
-export default function spendCategoriesReducer(state = initialState, action) {
-  const { type, spendCategories, error } = action;
+function byId(state = {}, action) {
+  const { type, data } = action;
 
   switch (type) {
-    case actionTypes.FETCH_SPEND_CATEGORIES_SUCCESS: {
-      return Object.assign({}, state, {
-        byId: buildIdMap(spendCategories),
-        fetchErrorMessage: '',
-        isFetching: false
-      });
-    }
-
-    case actionTypes.FETCH_SPEND_CATEGORIES_ERROR: {
-      return Object.assign({}, state, {
-        fetchErrorMessage: error,
-        isFetching: false
-      });
-    }
-
-    case actionTypes.FETCH_SPEND_CATEGORIES_BEGIN: {
-      return Object.assign({}, state, {
-        isFetching: true
-      });
+    case initializeActionTypes.INITIALIZE_SUCCESS: {
+      return Object.assign({}, state, buildIdMap(data.spendCategories));
     }
 
     default:
       return state;
   }
 }
+
+export default combineReducers({
+  byId: byId
+});

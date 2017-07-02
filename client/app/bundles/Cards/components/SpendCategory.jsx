@@ -18,7 +18,7 @@ class SpendCategory extends React.Component {
 }
 
 SpendCategory.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired
 };
 

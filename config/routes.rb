@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: '/graphiql', graphql_path: '/graphql'
+  end
+
+  post '/graphql', to: 'graphql#execute'
+
   # [STEALTH] No New Friends (or Users), but allow registered Users to edit themselves
   # https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-edit-their-password
   # (Solution 2)

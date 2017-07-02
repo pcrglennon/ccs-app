@@ -4,7 +4,7 @@ import Card from '../components/Card';
 
 function mapStateToProps(state, props) {
   return {
-    rewards: Object.values(state.rewardsStore.byId).filter((reward) => reward.card_id === props.id)
+    rewards: Object.values(state.rewardsStore.byId).filter((reward) => reward.cardId === props.id)
   };
 }
 

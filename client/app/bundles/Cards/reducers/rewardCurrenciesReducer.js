@@ -1,37 +1,28 @@
-import * as actionTypes from '../constants/cardsConstants';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  byId: {}
-};
+import * as initializeActionTypes from '../constants/initializeConstants';
 
-// Ugh
-// Can be greatly cleaned up after transition to GraphQL
-function buildIdMapFromCards(cardsArray) {
-  const rewardsArray = cardsArray.reduce((array, card) => {
-    return array.concat(card.rewards);
-  }, []);
-
-  const rewardCurrenciesArray = rewardsArray.reduce((array, reward) => {
-    return array.concat([reward.reward_currency]);
-  }, []);
-
+// TODO - refactor!
+function buildIdMap(rewardCurrenciesArray) {
   return rewardCurrenciesArray.reduce((object, rewardCurrency) => {
     object[rewardCurrency.id] = rewardCurrency;
     return object;
   }, {});
 }
 
-export default function rewardCurrenciesReducer(state = initialState, action) {
-  const { type, cards, error } = action;
+function byId(state = {}, action) {
+  const { type, data } = action;
 
   switch (type) {
-    case actionTypes.FETCH_CARDS_SUCCESS: {
-      return Object.assign({}, state, {
-        byId: buildIdMapFromCards(cards)
-      });
+    case initializeActionTypes.INITIALIZE_SUCCESS: {
+      return Object.assign({}, state, buildIdMap(data.rewardCurrencies));
     }
 
     default:
       return state;
   }
 }
+
+export default combineReducers({
+  byId: byId
+});

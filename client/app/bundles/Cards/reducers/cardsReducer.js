@@ -1,11 +1,8 @@
-import * as actionTypes from '../constants/cardsConstants';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  byId: {},
-  isFetching: false,
-  fetchErrorMessage: ''
-};
+import * as initializeActionTypes from '../constants/initializeConstants';
 
+// TODO - refactor!
 function buildIdMap(cardsArray) {
   return cardsArray.reduce((object, card) => {
     object[card.id] = card;
@@ -13,32 +10,19 @@ function buildIdMap(cardsArray) {
   }, {});
 }
 
-export default function cardsReducer(state = initialState, action) {
-  const { type, cards, error } = action;
+function byId(state = {}, action) {
+  const { type, data } = action;
 
   switch (type) {
-    case actionTypes.FETCH_CARDS_SUCCESS: {
-      return Object.assign({}, state, {
-        byId: buildIdMap(cards),
-        fetchErrorMessage: '',
-        isFetching: false
-      });
-    }
-
-    case actionTypes.FETCH_CARDS_ERROR: {
-      return Object.assign({}, state, {
-        fetchErrorMessage: error,
-        isFetching: false
-      });
-    }
-
-    case actionTypes.FETCH_CARDS_BEGIN: {
-      return Object.assign({}, state, {
-        isFetching: true
-      });
+    case initializeActionTypes.INITIALIZE_SUCCESS: {
+      return Object.assign({}, state, buildIdMap(data.cards));
     }
 
     default:
       return state;
   }
 }
+
+export default combineReducers({
+  byId: byId
+});

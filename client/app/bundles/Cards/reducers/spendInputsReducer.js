@@ -1,9 +1,7 @@
-import { FETCH_SPEND_CATEGORIES_SUCCESS } from '../constants/spendCategoriesConstants';
-import * as actionTypes from '../constants/spendInputsConstants';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  bySpendCategoryId: {}
-};
+import * as initializeActionTypes from '../constants/initializeConstants';
+import * as actionTypes from '../constants/spendInputsConstants';
 
 function buildIdMap(spendCategoriesArray) {
   return spendCategoriesArray.reduce((object, spendCategory) => {
@@ -12,22 +10,18 @@ function buildIdMap(spendCategoriesArray) {
   }, {});
 }
 
-export default function spendInputsReducer(state = initialState, action) {
-  const { type, spendCategories, spendCategoryId, newAmount } = action;
+function bySpendCategoryId(state = {}, action) {
+  const { type, data, spendCategoryId, newAmount } = action;
 
   switch (type) {
-    case FETCH_SPEND_CATEGORIES_SUCCESS: {
-      return Object.assign({}, state, {
-        bySpendCategoryId: buildIdMap(spendCategories)
-      });
+    case initializeActionTypes.INITIALIZE_SUCCESS: {
+      return Object.assign({}, state, buildIdMap(data.spendCategories));
     }
 
     case actionTypes.UPDATE_SPEND_INPUT: {
       return Object.assign({}, state, {
-        bySpendCategoryId: Object.assign({}, state.bySpendCategoryId, {
-          [spendCategoryId]: Object.assign({}, state.bySpendCategoryId[spendCategoryId], {
-            amount: newAmount
-          })
+        [spendCategoryId]: Object.assign({}, state[spendCategoryId], {
+          amount: newAmount
         })
       });
     }
@@ -36,3 +30,7 @@ export default function spendInputsReducer(state = initialState, action) {
       return state;
   }
 }
+
+export default combineReducers({
+  bySpendCategoryId: bySpendCategoryId
+});

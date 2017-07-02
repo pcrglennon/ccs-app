@@ -18,7 +18,7 @@ class Reward extends React.Component {
 }
 
 Reward.propTypes = {
-  percentage: PropTypes.string.isRequired,
+  percentage: PropTypes.number.isRequired,
   spendCategory: PropTypes.shape({
     name: PropTypes.string.isRequired
   }).isRequired,

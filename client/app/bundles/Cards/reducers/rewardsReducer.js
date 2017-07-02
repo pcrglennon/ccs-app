@@ -1,31 +1,28 @@
-import * as actionTypes from '../constants/cardsConstants';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  byId: {}
-};
+import * as initializeActionTypes from '../constants/initializeConstants';
 
-function buildIdMapFromCards(cardsArray) {
-  const rewardsArray = cardsArray.reduce((array, card) => {
-    return array.concat(card.rewards);
-  }, []);
-
+// TODO - refactor!
+function buildIdMap(rewardsArray) {
   return rewardsArray.reduce((object, reward) => {
     object[reward.id] = reward;
     return object;
   }, {});
 }
 
-export default function rewardsReducer(state = initialState, action) {
-  const { type, cards, error } = action;
+function byId(state = {}, action) {
+  const { type, data } = action;
 
   switch (type) {
-    case actionTypes.FETCH_CARDS_SUCCESS: {
-      return Object.assign({}, state, {
-        byId: buildIdMapFromCards(cards)
-      });
+    case initializeActionTypes.INITIALIZE_SUCCESS: {
+      return Object.assign({}, state, buildIdMap(data.rewards));
     }
 
     default:
       return state;
   }
 }
+
+export default combineReducers({
+  byId: byId
+});

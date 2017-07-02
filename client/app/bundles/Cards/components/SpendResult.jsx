@@ -3,19 +3,15 @@ import PropTypes from 'prop-types';
 
 class SpendResult extends React.Component {
   convertedPercentage() {
-    return parseFloat(this.props.percentage) / 100.0;
-  }
-
-  convertedCentsPerPoint() {
-    return parseFloat(this.props.rewardCurrency.value_cents);
+    return this.props.percentage / 100.0;
   }
 
   valuePoints() {
-    return this.props.amount * parseFloat(this.props.percentage);
+    return this.props.amount * this.props.percentage;
   }
 
   valueDollars() {
-    return (this.props.amount * this.convertedPercentage() * this.convertedCentsPerPoint()).toFixed(2);
+    return (this.props.amount * this.convertedPercentage() * this.props.rewardCurrency.valueCents).toFixed(2);
   }
 
   render() {
@@ -33,10 +29,10 @@ class SpendResult extends React.Component {
 
 SpendResult.propTypes = {
   amount: PropTypes.number.isRequired,
-  percentage: PropTypes.string.isRequired,
+  percentage: PropTypes.number.isRequired,
   rewardCurrency: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value_cents: PropTypes.string.isRequired
+    valueCents: PropTypes.number.isRequired
   }).isRequired
 };
 

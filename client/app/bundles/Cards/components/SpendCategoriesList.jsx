@@ -28,7 +28,7 @@ class SpendCategoriesList extends React.Component {
 
 SpendCategoriesList.propTypes = {
   spendCategories: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired
+    id: PropTypes.string.isRequired
   }).isRequired).isRequired
 };
 
