@@ -2,13 +2,11 @@ class RewardCurrenciesController < ApplicationController
   before_action :set_reward_currency, only: [:show, :edit, :update, :destroy]
 
   # GET /reward_currencies
-  # GET /reward_currencies.json
   def index
     @reward_currencies = RewardCurrency.all
   end
 
   # GET /reward_currencies/1
-  # GET /reward_currencies/1.json
   def show
   end
 
@@ -22,43 +20,29 @@ class RewardCurrenciesController < ApplicationController
   end
 
   # POST /reward_currencies
-  # POST /reward_currencies.json
   def create
     @reward_currency = RewardCurrency.new(reward_currency_params)
 
-    respond_to do |format|
-      if @reward_currency.save
-        format.html { redirect_to @reward_currency, notice: 'Reward currency was successfully created.' }
-        format.json { render :show, status: :created, location: @reward_currency }
-      else
-        format.html { render :new }
-        format.json { render json: @reward_currency.errors, status: :unprocessable_entity }
-      end
+    if @reward_currency.save
+      redirect_to @reward_currency, notice: 'Reward currency was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /reward_currencies/1
-  # PATCH/PUT /reward_currencies/1.json
   def update
-    respond_to do |format|
-      if @reward_currency.update(reward_currency_params)
-        format.html { redirect_to @reward_currency, notice: 'Reward currency was successfully updated.' }
-        format.json { render :show, status: :ok, location: @reward_currency }
-      else
-        format.html { render :edit }
-        format.json { render json: @reward_currency.errors, status: :unprocessable_entity }
-      end
+    if @reward_currency.update(reward_currency_params)
+      redirect_to @reward_currency, notice: 'Reward currency was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /reward_currencies/1
-  # DELETE /reward_currencies/1.json
   def destroy
     @reward_currency.destroy
-    respond_to do |format|
-      format.html { redirect_to reward_currencies_url, notice: 'Reward currency was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to reward_currencies_url, notice: 'Reward currency was successfully destroyed'
   end
 
   private

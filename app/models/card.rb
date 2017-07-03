@@ -2,7 +2,7 @@ class Card < ApplicationRecord
   belongs_to :bank, optional: true
   belongs_to :network
 
-  has_many :rewards
+  has_many :rewards, dependent: :destroy
 
   accepts_nested_attributes_for :rewards, reject_if: :all_blank, allow_destroy: true
 

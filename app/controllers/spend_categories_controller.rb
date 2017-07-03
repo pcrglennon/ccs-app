@@ -2,13 +2,11 @@ class SpendCategoriesController < ApplicationController
   before_action :set_spend_category, only: [:show, :edit, :update, :destroy]
 
   # GET /spend_categories
-  # GET /spend_categories.json
   def index
     @spend_categories = SpendCategory.all
   end
 
   # GET /spend_categories/1
-  # GET /spend_categories/1.json
   def show
   end
 
@@ -22,43 +20,29 @@ class SpendCategoriesController < ApplicationController
   end
 
   # POST /spend_categories
-  # POST /spend_categories.json
   def create
     @spend_category = SpendCategory.new(spend_category_params)
 
-    respond_to do |format|
-      if @spend_category.save
-        format.html { redirect_to @spend_category, notice: 'Spend category was successfully created.' }
-        format.json { render :show, status: :created, location: @spend_category }
-      else
-        format.html { render :new }
-        format.json { render json: @spend_category.errors, status: :unprocessable_entity }
-      end
+    if @spend_category.save
+      redirect_to @spend_category, notice: 'Spend category was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /spend_categories/1
-  # PATCH/PUT /spend_categories/1.json
   def update
-    respond_to do |format|
-      if @spend_category.update(spend_category_params)
-        format.html { redirect_to @spend_category, notice: 'Spend category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @spend_category }
-      else
-        format.html { render :edit }
-        format.json { render json: @spend_category.errors, status: :unprocessable_entity }
-      end
+    if @spend_category.update(spend_category_params)
+      redirect_to @spend_category, notice: 'Spend category was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /spend_categories/1
-  # DELETE /spend_categories/1.json
   def destroy
     @spend_category.destroy
-    respond_to do |format|
-      format.html { redirect_to spend_categories_url, notice: 'Spend category was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to spend_categories_url, notice: 'Spend category was successfully destroyed.'
   end
 
   private
