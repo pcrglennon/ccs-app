@@ -7,10 +7,8 @@ function byId(state = {}, action) {
   const { type, data } = action;
 
   switch (type) {
-    case initializeActionTypes.INITIALIZE_SUCCESS: {
+    case initializeActionTypes.INITIALIZE_SUCCESS:
       return Object.assign({}, state, buildIdMap(data.rewardCurrencies));
-    }
-
     default:
       return state;
   }

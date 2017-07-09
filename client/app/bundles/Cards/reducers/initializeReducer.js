@@ -28,7 +28,6 @@ function errors(state = [], action) {
     case actionTypes.INITIALIZE_SUCCESS: {
       return [];
     }
-
     default:
       return state;
   }

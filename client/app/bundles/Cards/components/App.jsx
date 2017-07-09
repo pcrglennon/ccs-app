@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './styles/app.scss';
 
 import CardsListContainer from '../containers/CardsListContainer';
+import FiltersContainer from '../containers/FiltersContainer';
 import SpendCategoriesListContainer from '../containers/SpendCategoriesListContainer';
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
     } else {
       return (
         <div className={styles.app}>
+          <FiltersContainer />
           <SpendCategoriesListContainer />
           <CardsListContainer />
         </div>

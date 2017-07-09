@@ -1,0 +1,14 @@
+.filters {
+  border: 1px solid red;
+  display: flex;
+  flex: 0 1 100%;
+  flex-direction: row;
+  margin-bottom: 20px;
+  padding: 20px 30px;
+}
+
+.filter {
+  margin-left: 30px;
+
+  &:first-child { margin-left: 0; }
+}

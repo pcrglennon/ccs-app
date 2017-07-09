@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class SpendInput extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { amount: this.props.amount };
 
     this.handleChange = this.handleChange.bind(this);

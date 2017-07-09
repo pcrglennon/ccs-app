@@ -14,10 +14,8 @@ function bySpendCategoryId(state = {}, action) {
   const { type, data, spendCategoryId, newAmount } = action;
 
   switch (type) {
-    case initializeActionTypes.INITIALIZE_SUCCESS: {
+    case initializeActionTypes.INITIALIZE_SUCCESS:
       return Object.assign({}, state, buildIdMap(data.spendCategories));
-    }
-
     case actionTypes.UPDATE_SPEND_INPUT: {
       return Object.assign({}, state, {
         [spendCategoryId]: Object.assign({}, state[spendCategoryId], {
@@ -25,7 +23,6 @@ function bySpendCategoryId(state = {}, action) {
         })
       });
     }
-
     default:
       return state;
   }
