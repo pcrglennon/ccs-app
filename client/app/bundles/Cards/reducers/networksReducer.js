@@ -1,0 +1,28 @@
+import { combineReducers } from 'redux';
+
+import * as initializeActionTypes from '../constants/initializeConstants';
+
+// TODO - refactor!
+function buildIdMap(networksArray) {
+  return networksArray.reduce((object, network) => {
+    object[network.id] = network;
+    return object;
+  }, {});
+}
+
+function byId(state = {}, action) {
+  const { type, data } = action;
+
+  switch (type) {
+    case initializeActionTypes.INITIALIZE_SUCCESS: {
+      return Object.assign({}, state, buildIdMap(data.networks));
+    }
+
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({
+  byId: byId
+});

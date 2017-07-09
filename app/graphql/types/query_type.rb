@@ -1,12 +1,30 @@
 Types::QueryType = GraphQL::ObjectType.define do
   name 'Query'
 
+  field :banks do
+    description 'Return all Banks'
+
+    type types[Types::BankType]
+    resolve ->(_obj, _args, _ctx) {
+      Bank.all
+    }
+  end
+
   field :cards do
     description 'Return all Cards'
 
     type types[Types::CardType]
     resolve ->(_obj, _args, _ctx) {
       Card.all
+    }
+  end
+
+  field :networks do
+    description 'Return all Networks'
+
+    type types[Types::NetworkType]
+    resolve ->(_obj, _args, _ctx) {
+      Network.all
     }
   end
 

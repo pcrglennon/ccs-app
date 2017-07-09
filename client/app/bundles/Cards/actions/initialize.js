@@ -28,8 +28,16 @@ export function initialize() {
 
     const graphQLString = `
       query {
+        banks {
+          id name
+        }
+
         cards {
-          id name annualFee
+          id name annualFee bankId networkId
+        }
+
+        networks {
+          id name
         }
 
         rewards {
