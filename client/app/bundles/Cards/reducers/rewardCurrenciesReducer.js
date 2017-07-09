@@ -1,14 +1,7 @@
 import { combineReducers } from 'redux';
 
 import * as initializeActionTypes from '../constants/initializeConstants';
-
-// TODO - refactor!
-function buildIdMap(rewardCurrenciesArray) {
-  return rewardCurrenciesArray.reduce((object, rewardCurrency) => {
-    object[rewardCurrency.id] = rewardCurrency;
-    return object;
-  }, {});
-}
+import buildIdMap from './helpers/buildIdMap';
 
 function byId(state = {}, action) {
   const { type, data } = action;

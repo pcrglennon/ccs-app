@@ -1,14 +1,7 @@
 import { combineReducers } from 'redux';
 
 import * as initializeActionTypes from '../constants/initializeConstants';
-
-// TODO - refactor!
-function buildIdMap(spendCategoriesArray) {
-  return spendCategoriesArray.reduce((object, spendCategory) => {
-    object[spendCategory.id] = spendCategory;
-    return object;
-  }, {});
-}
+import buildIdMap from './helpers/buildIdMap';
 
 function byId(state = {}, action) {
   const { type, data } = action;

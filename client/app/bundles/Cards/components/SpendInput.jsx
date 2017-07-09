@@ -4,11 +4,20 @@ import PropTypes from 'prop-types';
 class SpendInput extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = { amount: this.props.amount };
+
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    this.props.updateAmount(parseInt(event.target.value));
+    this.setState({ amount: event.target.value });
+
+    const parsedAmount = parseInt(event.target.value);
+
+    if (!Number.isNaN(parsedAmount)) {
+      this.props.updateAmount(parsedAmount);
+    }
   }
 
   render() {
@@ -16,7 +25,7 @@ class SpendInput extends React.Component {
       <div>
         <em>$</em>
         <input
-          value={this.props.amount}
+          value={this.state.amount}
           onChange={this.handleChange}
           type="number"
           step="0.01"
