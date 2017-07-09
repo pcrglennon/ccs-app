@@ -1,0 +1,27 @@
+.cardsList {
+  border: 2px solid black;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  padding: 50px 30px;
+}
+
+.card {
+  border: 1px solid blue;
+  display: flex;
+  flex: 0 0 25%;
+  flex-direction: column;
+  margin-left: 30px;
+  padding: 20px 10px;
+
+  &:first-child { margin-left: 0; }
+
+  .name {
+    text-align: center;
+  }
+
+  .annualFee {
+  }
+}

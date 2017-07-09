@@ -3,4 +3,5 @@ Types::CardType = GraphQL::ObjectType.define do
 
   field :id, !types.ID
   field :name, !types.String
+  field :annualFee, !types.String, property: :annual_fee
 end

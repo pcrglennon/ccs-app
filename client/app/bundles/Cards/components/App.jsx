@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './styles/app.scss';
+
 import CardsListContainer from '../containers/CardsListContainer';
 import SpendCategoriesListContainer from '../containers/SpendCategoriesListContainer';
 
@@ -32,7 +34,7 @@ class App extends React.Component {
       return this.renderErrorMessages();
     } else {
       return (
-        <div>
+        <div className={styles.app}>
           <SpendCategoriesListContainer />
           <CardsListContainer />
         </div>

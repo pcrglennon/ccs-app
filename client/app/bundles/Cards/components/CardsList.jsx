@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './styles/cards.scss';
+
 import CardContainer from '../containers/CardContainer';
 
 class CardsList extends React.Component {
@@ -17,9 +19,7 @@ class CardsList extends React.Component {
 
   render() {
     return (
-      <div className="cards-list">
-        <h3>CardsList</h3>
-
+      <div className={styles.cardsList}>
         {this.renderCards()}
       </div>
     );

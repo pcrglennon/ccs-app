@@ -13,7 +13,7 @@ class SpendInput extends React.Component {
 
   render() {
     return (
-      <div className="spend-input">
+      <div>
         <em>$</em>
         <input
           value={this.props.amount}

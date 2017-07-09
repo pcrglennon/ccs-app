@@ -38,6 +38,14 @@ const config = {
         test: /\.jsx?$/,
         use: 'babel-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style-loader',
+          'css-loader?modules,localIdentName=[path][name]--[local]--[hash:base64:5]',
+          'sass-loader'
+        ]
       }
     ]
   }

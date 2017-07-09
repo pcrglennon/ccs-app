@@ -9,3 +9,7 @@
     - Figure out Selectors
     - Refactor repeated `buildIdMap` function in reducers
     - Avoid NaN warning when spendInput input is empty
+  - Webpack/general tooling
+    - React CSS Modules plugin, to avoid camelCased CSS classes
+    - Use `ExtractTextPlugin` to extract CSS into separate file
+    - `autoprefixer`

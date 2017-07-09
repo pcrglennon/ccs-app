@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './styles/cards.scss';
+
 import RewardContainer from '../containers/RewardContainer';
 
 class Card extends React.Component {
@@ -23,12 +25,16 @@ class Card extends React.Component {
 
   render() {
     return (
-      <div className="card">
-        <p>Name: {this.props.name}</p>
+      <div className={styles.card}>
+        <h3 className={styles.name}>{this.props.name}</h3>
 
-        <div className="rewards" style={{ paddingLeft: '20px' }}>
-          <h4>Rewards</h4>
+        <p className={styles.annualFee}>
+          Annual Fee: <strong>${this.props.annualFee}</strong>
+        </p>
 
+        <h4>Rewards</h4>
+
+        <div className="rewards">
           {this.renderRewards()}
         </div>
       </div>

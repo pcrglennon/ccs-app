@@ -29,7 +29,7 @@ export function initialize() {
     const graphQLString = `
       query {
         cards {
-          id name
+          id name annualFee
         }
 
         rewards {
