@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import styles from './styles/cards.scss';
 
-import RewardContainer from '../containers/RewardContainer';
+import CategorizedRewardContainer from '../containers/CategorizedRewardContainer';
+import UncategorizedRewardContainer from '../containers/UncategorizedRewardContainer';
 
 class Card extends React.Component {
   renderBankName() {
@@ -20,21 +21,41 @@ class Card extends React.Component {
     );
   }
 
-  renderRewards() {
-    if (this.props.rewards.length) {
-      return this.props.rewards.map((reward) => {
-        return (
-          <RewardContainer
-            key={reward.id}
-            {...reward}
-          />
-        );
-      });
-    } else {
+  renderCategorizedRewards() {
+    return this.props.categorizedRewards.map((reward) => {
       return (
-        <p>None :(</p>
+        <CategorizedRewardContainer
+          key={reward.id}
+          {...reward}
+        />
       );
+    });
+  }
+
+  renderUncategorizedReward() {
+    if (!this.props.uncategorizedReward) { return null; }
+
+    return (
+      <UncategorizedRewardContainer
+        key={this.props.uncategorizedReward.id}
+        excludedSpendCategoryIds={this.props.categorizedRewards.map(reward => reward.id)}
+        {...this.props.uncategorizedReward}
+      />
+    );
+  }
+
+  renderRewards() {
+    if (this.props.categorizedRewards.length === 0 && !this.props.uncategorizedReward) {
+      return (<p>None!</p>);
     }
+
+    return (
+      <div className="rewards">
+        {this.renderCategorizedRewards()}
+
+        {this.renderUncategorizedReward()}
+      </div>
+    );
   }
 
   render() {
@@ -50,11 +71,7 @@ class Card extends React.Component {
           Annual Fee: <strong>${this.props.annualFee}</strong>
         </p>
 
-        <h4>Rewards</h4>
-
-        <div className="rewards">
-          {this.renderRewards()}
-        </div>
+        {this.renderRewards()}
       </div>
     );
   }
@@ -70,9 +87,12 @@ Card.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired,
-  rewards: PropTypes.arrayOf(PropTypes.shape({
+  categorizedRewards: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired
-  }).isRequired).isRequired
+  }).isRequired).isRequired,
+  uncategorizedReward: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  })
 };
 
 export default Card;

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import SpendResultContainer from '../containers/SpendResultContainer';
 
-class Reward extends React.Component {
+class UncategorizedReward extends React.Component {
   render() {
     return (
       <div className="reward">
         <p>
-          {this.props.percentage}% back on <em>{this.props.spendCategory.name}</em>:
+          {this.props.percentage}% back on <em>{this.props.spendCategoryName}</em>:
         </p>
 
         <SpendResultContainer {...this.props} />
@@ -17,12 +17,10 @@ class Reward extends React.Component {
   }
 }
 
-Reward.propTypes = {
+UncategorizedReward.propTypes = {
   percentage: PropTypes.number.isRequired,
-  spendCategory: PropTypes.shape({
-    name: PropTypes.string.isRequired
-  }).isRequired,
+  spendCategoryName: PropTypes.string.isRequired,
   rewardCurrency: PropTypes.object.isRequired
 };
 
-export default Reward;
+export default UncategorizedReward;
