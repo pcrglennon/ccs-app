@@ -38,7 +38,7 @@ class Card extends React.Component {
     return (
       <UncategorizedRewardContainer
         key={this.props.uncategorizedReward.id}
-        excludedSpendCategoryIds={this.props.categorizedRewards.map(reward => reward.id)}
+        excludedSpendCategoryIds={this.props.categorizedRewards.map(reward => reward.spendCategoryId)}
         {...this.props.uncategorizedReward}
       />
     );
