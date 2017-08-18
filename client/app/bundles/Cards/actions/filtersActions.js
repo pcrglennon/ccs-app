@@ -13,3 +13,10 @@ export function updateNetworkId(networkId) {
     networkId: networkId
   };
 }
+
+export function updateSelectedCardsOnly(selectedCardsOnly) {
+  return {
+    type: actionTypes.FILTERS_UPDATE_SELECTED_CARDS_ONLY,
+    selectedCardsOnly: selectedCardsOnly
+  };
+}

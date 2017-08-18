@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import applyFilters from '../utils/applyFilters';
+import applyCardFilters from '../utils/applyCardFilters';
 import CardsList from '../components/CardsList';
 
 function mapStateToProps(state) {
   return {
-    cards: applyFilters(Object.values(state.cardsStore.byId), state.filtersStore)
+    cards: applyCardFilters(state.filtersStore, Object.values(state.cardsStore.byId), state.cardsStore.selectedIds)
   };
 }
 

@@ -24,7 +24,23 @@ function networkId(state = '', action) {
   }
 }
 
-export default combineReducers({
+function selectedCardsOnly(state = false, action) {
+  const { type, selectedCardsOnly } = action;
+
+  switch (type) {
+    case actionTypes.FILTERS_UPDATE_SELECTED_CARDS_ONLY:
+      return selectedCardsOnly;
+    default:
+      return state;
+  }
+}
+
+const cardProperties = combineReducers({
   bankId: bankId,
   networkId: networkId
+});
+
+export default combineReducers({
+  cardProperties: cardProperties,
+  selectedCardsOnly: selectedCardsOnly
 });
