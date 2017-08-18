@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import Card from '../components/Card';
+import { selectCard, deselectCard } from '../actions/cardsActions';
 import { UNCATEGORIZED_SPEND_NAME } from '../constants/spendCategoriesConstants';
 
 // REFACTOR
@@ -24,6 +25,7 @@ function mapStateToProps(state, props) {
   const { categorizedRewards, uncategorizedReward } = partitionRewards(state, props.id);
 
   return {
+    isSelected: state.cardsStore.selectedIds.indexOf(props.id) > - 1,
     bank: Object.values(state.banksStore.byId).find((bank) => bank.id === props.bankId),
     network: Object.values(state.networksStore.byId).find((network) => network.id === props.networkId),
     categorizedRewards: categorizedRewards,
@@ -31,8 +33,15 @@ function mapStateToProps(state, props) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
+function mapDispatchToProps(dispatch, props) {
+  return {
+    select: () => {
+      dispatch(selectCard(props.id));
+    },
+    deselect: () => {
+      dispatch(deselectCard(props.id));
+    }
+  };
 }
 
 const CardContainer = connect(

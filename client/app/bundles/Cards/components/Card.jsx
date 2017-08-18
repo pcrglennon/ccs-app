@@ -7,6 +7,42 @@ import CategorizedRewardContainer from '../containers/CategorizedRewardContainer
 import UncategorizedRewardContainer from '../containers/UncategorizedRewardContainer';
 
 class Card extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onSelectToggleClick = this.onSelectToggleClick.bind(this);
+  }
+
+  // TODO - should probably be moved to own component!
+  selectToggleClassName() {
+    if (this.props.isSelected) {
+      return `${styles.selectToggleSelected}`;
+    } else {
+      return `${styles.selectToggleNotSelected}`;
+    }
+  }
+
+  // TODO - should probably be moved to own component!
+  onSelectToggleClick(_event) {
+    if (this.props.isSelected) {
+      this.props.deselect();
+    } else {
+      this.props.select();
+    }
+  }
+
+  // TODO - should probably be moved to own component!
+  renderSelectToggle() {
+    return (
+      <div className={styles.selectToggleContainer}>
+        <div
+          onClick={this.onSelectToggleClick}
+          className={this.selectToggleClassName()}
+        />
+      </div>
+    );
+  }
+
   renderBankName() {
     if (!this.props.bank) { return null; }
 
@@ -61,6 +97,8 @@ class Card extends React.Component {
   render() {
     return (
       <div className={styles.card}>
+        {this.renderSelectToggle()}
+
         <h3 className={styles.name}>{this.props.name}</h3>
 
         {this.renderBankName()}
@@ -79,6 +117,7 @@ class Card extends React.Component {
 
 Card.propTypes = {
   name: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
   bank: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
@@ -92,7 +131,8 @@ Card.propTypes = {
   }).isRequired).isRequired,
   uncategorizedReward: PropTypes.shape({
     id: PropTypes.string.isRequired
-  })
+  }),
+  select: PropTypes.func.isRequired
 };
 
 export default Card;

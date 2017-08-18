@@ -14,14 +14,46 @@
   flex: 0 0 25%;
   flex-direction: column;
   margin-left: 30px;
-  padding: 20px 10px;
+  padding: 10px 10px 20px;
 
   &:first-child { margin-left: 0; }
 
   .name {
     text-align: center;
   }
+}
 
-  .annualFee {
+.selectToggleContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+// TODO - should probably be moved to own component!
+.selectToggle {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 20px;
+  cursor: pointer;
+  width: 20px;
+}
+
+.selectToggleSelected {
+  composes: selectToggle;
+
+  align-items: center;
+  display: flex;
+  justify-conent: center;
+
+  &:before {
+    content: '✔';
+    flex: 1;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
   }
+}
+
+.selectToggleNotSelected {
+  composes: selectToggle;
 }
