@@ -7,35 +7,47 @@ class Filters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bankId: props.cardProperties.bankId,
-      networkId: props.cardProperties.networkId,
+      cardProperties: props.cardProperties,
+      partialCardName: props.partialCardName,
       selectedCardsOnly: props.selectedCardsOnly
     };
 
     this.handleBankIdChange = this.handleBankIdChange.bind(this);
     this.handleNetworkIdChange = this.handleNetworkIdChange.bind(this);
+    this.handlePartialCardNameChange = this.handlePartialCardNameChange.bind(this);
     this.handleSelectedCardsOnlyChange = this.handleSelectedCardsOnlyChange.bind(this);
   }
 
-  // TODO - filter this & networkId (and any other exact card property filters) into
-  // own component
   handleBankIdChange(event) {
-    const id = event.target.value;
-
-    this.setState({ bankId: id });
-    this.props.updateBankId(id);
+    this.updateCardProperty('bankId', event.target.value);
   }
 
   handleNetworkIdChange(event) {
-    const id = event.target.value;
+    this.updateCardProperty('networkId', event.target.value);
+  }
 
-    this.setState({ networkId: id });
-    this.props.updateNetworkId(id);
+  handlePartialCardNameChange(event) {
+    const partialCardName = event.target.value.trim();
+
+    this.setState({ partialCardName: partialCardName });
+    this.props.updatePartialCardName(partialCardName);
   }
 
   handleSelectedCardsOnlyChange(event) {
     this.setState({ selectedCardsOnly: event.target.checked });
     this.props.updateSelectedCardsOnly(event.target.checked);
+  }
+
+  updateCardProperty(key, value) {
+    const cardProperties = this.state.cardProperties;
+
+    this.setState({
+      cardProperties: Object.assign({}, cardProperties, {
+        [key]: value
+      })
+    });
+
+    this.props.updateCardProperty(key, value);
   }
 
   renderOptions(objects) {
@@ -52,7 +64,7 @@ class Filters extends React.Component {
         <div className={styles.filter}>
           <label>Banks:</label>
 
-          <select value={this.state.bankId} onChange={this.handleBankIdChange}>
+          <select value={this.state.cardProperties.bankId} onChange={this.handleBankIdChange}>
             <option value=''>--All--</option>
 
             {this.renderOptions(this.props.banks)}
@@ -62,11 +74,21 @@ class Filters extends React.Component {
         <div className={styles.filter}>
           <label>Networks:</label>
 
-          <select value={this.state.networkId} onChange={this.handleNetworkIdChange}>
+          <select value={this.state.cardProperties.networkId} onChange={this.handleNetworkIdChange}>
             <option value=''>--All--</option>
 
             {this.renderOptions(this.props.networks)}
           </select>
+        </div>
+
+        <div className={styles.filter}>
+          <label>Card Name:</label>
+
+          <input
+            type="text"
+            onChange={this.handlePartialCardNameChange}
+            value={this.state.partialCardName}
+          />
         </div>
 
         <div className={styles.filter}>
@@ -88,6 +110,7 @@ Filters.propTypes = {
     bankId: PropTypes.string.isRequired,
     networkId: PropTypes.string.isRequired
   }),
+  partialCardName: PropTypes.string.isRequired,
   selectedCardsOnly: PropTypes.bool.isRequired,
   banks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
@@ -97,8 +120,8 @@ Filters.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired).isRequired,
-  updateBankId: PropTypes.func.isRequired,
-  updateNetworkId: PropTypes.func.isRequired,
+  updateCardProperty: PropTypes.func.isRequired,
+  updatePartialCardName: PropTypes.func.isRequired,
   updateSelectedCardsOnly: PropTypes.func.isRequired
 };
 
