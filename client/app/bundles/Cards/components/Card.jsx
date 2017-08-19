@@ -14,8 +14,11 @@ class Card extends React.Component {
   }
 
   // TODO - should probably be moved to own component!
+  // And refactored
   selectToggleClassName() {
-    if (this.props.isSelected) {
+    if (this.props.inSelectedPortfolio && !this.props.portfolioManagingCards) {
+      return `${styles.selectToggleSelectedLocked}`;
+    } else if (this.props.inSelectedPortfolio && this.props.portfolioManagingCards) {
       return `${styles.selectToggleSelected}`;
     } else {
       return `${styles.selectToggleNotSelected}`;
@@ -24,15 +27,21 @@ class Card extends React.Component {
 
   // TODO - should probably be moved to own component!
   onSelectToggleClick(_event) {
-    if (this.props.isSelected) {
-      this.props.deselect();
+    // Only allow toggling when Portfolio is in "managing cards" state
+    if (this.props.selectedPortfolioId.length === 0 || !this.props.portfolioManagingCards) { return; }
+
+    if (this.props.inSelectedPortfolio) {
+      this.props.removeCardFromPortfolio(this.props.selectedPortfolioId);
     } else {
-      this.props.select();
+      this.props.addCardToPortfolio(this.props.selectedPortfolioId);
     }
   }
 
   // TODO - should probably be moved to own component!
   renderSelectToggle() {
+    // Only display toggle when there is a selected Portfolio
+    if (this.props.selectedPortfolioId.length === 0) { return null; }
+
     return (
       <div className={styles.selectToggleContainer}>
         <div
@@ -117,7 +126,7 @@ class Card extends React.Component {
 
 Card.propTypes = {
   name: PropTypes.string.isRequired,
-  isSelected: PropTypes.bool.isRequired,
+  inSelectedPortfolio: PropTypes.bool.isRequired,
   bank: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
@@ -132,7 +141,10 @@ Card.propTypes = {
   uncategorizedReward: PropTypes.shape({
     id: PropTypes.string.isRequired
   }),
-  select: PropTypes.func.isRequired
+  selectedPortfolioId: PropTypes.string.isRequired,
+  portfolioManagingCards: PropTypes.bool.isRequired,
+  addCardToPortfolio: PropTypes.func.isRequired,
+  removeCardFromPortfolio: PropTypes.func.isRequired
 };
 
 export default Card;

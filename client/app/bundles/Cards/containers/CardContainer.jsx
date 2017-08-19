@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Card from '../components/Card';
-import { selectCard, deselectCard } from '../actions/cardsActions';
+import { addCardToPortfolio, removeCardFromPortfolio } from '../actions/portfoliosActions';
 import { UNCATEGORIZED_SPEND_NAME } from '../constants/spendCategoriesConstants';
 
 // REFACTOR
@@ -21,25 +21,35 @@ function partitionRewards(state, cardId) {
   };
 }
 
+function isCardInSelectedPortfolio(state, cardId) {
+  if (!state.portfoliosStore.selectedId) { return false; }
+
+  const selectedPortfolio = state.portfoliosStore.byId[state.portfoliosStore.selectedId];
+  return selectedPortfolio.cardIds.indexOf(cardId) > -1;
+}
+
 function mapStateToProps(state, props) {
   const { categorizedRewards, uncategorizedReward } = partitionRewards(state, props.id);
+  const inSelectedPortfolio = isCardInSelectedPortfolio(state, props.id);
 
   return {
-    isSelected: state.cardsStore.selectedIds.indexOf(props.id) > - 1,
+    inSelectedPortfolio: inSelectedPortfolio,
     bank: Object.values(state.banksStore.byId).find((bank) => bank.id === props.bankId),
     network: Object.values(state.networksStore.byId).find((network) => network.id === props.networkId),
     categorizedRewards: categorizedRewards,
-    uncategorizedReward: uncategorizedReward
+    uncategorizedReward: uncategorizedReward,
+    selectedPortfolioId: state.portfoliosStore.selectedId,
+    portfolioManagingCards: state.portfoliosStore.managingCards
   };
 }
 
 function mapDispatchToProps(dispatch, props) {
   return {
-    select: () => {
-      dispatch(selectCard(props.id));
+    addCardToPortfolio: (portfolioId) => {
+      dispatch(addCardToPortfolio(portfolioId, props.id));
     },
-    deselect: () => {
-      dispatch(deselectCard(props.id));
+    removeCardFromPortfolio: (portfolioId) => {
+      dispatch(removeCardFromPortfolio(portfolioId, props.id));
     }
   };
 }

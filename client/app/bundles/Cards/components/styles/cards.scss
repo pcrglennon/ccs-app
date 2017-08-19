@@ -31,20 +31,18 @@
 
 // TODO - should probably be moved to own component!
 .selectToggle {
+  align-items: center;
   border: 1px solid black;
   border-radius: 50%;
-  height: 20px;
   cursor: pointer;
+  display: flex;
+  height: 20px;
+  justify-content: center;
   width: 20px;
 }
 
+.selectToggle:hover,
 .selectToggleSelected {
-  composes: selectToggle;
-
-  align-items: center;
-  display: flex;
-  justify-conent: center;
-
   &:before {
     content: '✔';
     flex: 1;
@@ -54,6 +52,29 @@
   }
 }
 
+.selectToggleSelected {
+  composes: selectToggle;
+
+  &:before,
+  &:hover:before {
+    color: #000;
+  }
+}
+
 .selectToggleNotSelected {
   composes: selectToggle;
+
+  &:hover:before { color: #BBB; }
+}
+
+.selectToggleSelectedLocked {
+  composes: selectToggleSelected;
+
+  border: none;
+  cursor: default;
+
+  &:before,
+  &:hover:before {
+    color: green;
+  }
 }

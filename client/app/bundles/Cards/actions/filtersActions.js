@@ -14,10 +14,3 @@ export function updatePartialCardName(partialCardName) {
     partialCardName: partialCardName
   };
 }
-
-export function updateSelectedCardsOnly(selectedCardsOnly) {
-  return {
-    type: actionTypes.FILTERS_UPDATE_SELECTED_CARDS_ONLY,
-    selectedCardsOnly: selectedCardsOnly
-  };
-}

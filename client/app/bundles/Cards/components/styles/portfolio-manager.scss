@@ -1,0 +1,41 @@
+.portfolioManager {
+  align-items: center;
+  border: 1px solid green;
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: row;
+  margin-bottom: 20px;
+  padding: 20px 30px;
+}
+
+.selection { margin-right: 20px; }
+
+.button {
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  cursor: pointer;
+  padding: 10px 15px;
+  margin-left: 20px;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+
+  &:disabled {
+    background-color: lightgray;
+    border-color: lightgray;
+    color: white;
+    cursor: default;
+  }
+}
+
+.create {
+  align-items: center;
+  border-left: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  padding: 0 0 0 20px;
+}

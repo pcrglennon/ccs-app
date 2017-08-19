@@ -32,19 +32,7 @@ function partialCardName(state = '', action) {
   }
 }
 
-function selectedCardsOnly(state = false, action) {
-  const { type, selectedCardsOnly } = action;
-
-  switch (type) {
-    case actionTypes.FILTERS_UPDATE_SELECTED_CARDS_ONLY:
-      return selectedCardsOnly;
-    default:
-      return state;
-  }
-}
-
 export default combineReducers({
   cardProperties: cardProperties,
-  partialCardName: partialCardName,
-  selectedCardsOnly: selectedCardsOnly
+  partialCardName: partialCardName
 });

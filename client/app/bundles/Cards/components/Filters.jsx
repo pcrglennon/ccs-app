@@ -8,14 +8,12 @@ class Filters extends React.Component {
     super(props);
     this.state = {
       cardProperties: props.cardProperties,
-      partialCardName: props.partialCardName,
-      selectedCardsOnly: props.selectedCardsOnly
+      partialCardName: props.partialCardName
     };
 
     this.handleBankIdChange = this.handleBankIdChange.bind(this);
     this.handleNetworkIdChange = this.handleNetworkIdChange.bind(this);
     this.handlePartialCardNameChange = this.handlePartialCardNameChange.bind(this);
-    this.handleSelectedCardsOnlyChange = this.handleSelectedCardsOnlyChange.bind(this);
   }
 
   handleBankIdChange(event) {
@@ -31,11 +29,6 @@ class Filters extends React.Component {
 
     this.setState({ partialCardName: partialCardName });
     this.props.updatePartialCardName(partialCardName);
-  }
-
-  handleSelectedCardsOnlyChange(event) {
-    this.setState({ selectedCardsOnly: event.target.checked });
-    this.props.updateSelectedCardsOnly(event.target.checked);
   }
 
   updateCardProperty(key, value) {
@@ -90,16 +83,6 @@ class Filters extends React.Component {
             value={this.state.partialCardName}
           />
         </div>
-
-        <div className={styles.filter}>
-          <label>Show Selected Only:</label>
-
-          <input
-            type="checkbox"
-            onChange={this.handleSelectedCardsOnlyChange}
-            value={this.state.selectedCardsOnly}
-          />
-        </div>
       </div>
     );
   }
@@ -111,7 +94,6 @@ Filters.propTypes = {
     networkId: PropTypes.string.isRequired
   }),
   partialCardName: PropTypes.string.isRequired,
-  selectedCardsOnly: PropTypes.bool.isRequired,
   banks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
@@ -121,8 +103,7 @@ Filters.propTypes = {
     name: PropTypes.string.isRequired
   }).isRequired).isRequired,
   updateCardProperty: PropTypes.func.isRequired,
-  updatePartialCardName: PropTypes.func.isRequired,
-  updateSelectedCardsOnly: PropTypes.func.isRequired
+  updatePartialCardName: PropTypes.func.isRequired
 };
 
 export default Filters;
