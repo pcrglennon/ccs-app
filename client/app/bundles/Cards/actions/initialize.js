@@ -36,7 +36,15 @@ export function initialize() {
           id name annualFee bankId networkId
         }
 
+        cardsPortfolios {
+          id portfolioId cardId
+        }
+
         networks {
+          id name
+        }
+
+        portfolios {
           id name
         }
 

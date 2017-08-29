@@ -1,3 +1,5 @@
+import graphQLRequest from '../utils/graphQLRequest';
+
 import * as actionTypes from '../constants/portfoliosConstants';
 
 export function setSelectedPortfolioId(id) {
@@ -14,30 +16,49 @@ export function toggleManagingPortfolioCards(toggleValue) {
   };
 }
 
-// Stubbed until Portfolios are persisted in backend
+function createPortfolioBegin() {
+  return {
+    type: actionTypes.PORTFOLIOS_CREATE_BEGIN
+  };
+}
+
+function createPortfolioSuccess(data) {
+  return {
+    type: actionTypes.PORTFOLIOS_CREATE_SUCCESS,
+    portfolio: data.createPortfolio
+  };
+}
+
+function createPortfolioErrors(errors) {
+  return {
+    type: actionTypes.PORTFOLIOS_CREATE_ERRORS,
+    errors: errors.map((error) => error.message)
+  };
+}
+
 export function createPortfolio(name) {
-  return {
-    type: actionTypes.PORTFOLIOS_CREATE,
-    portfolio: {
-      id: "" + parseInt(Math.random() * (1000 - 1) + 1),
-      name: name,
-      cardIds: []
-    }
-  };
-}
+  return (dispatch) => {
+    dispatch(createPortfolioBegin());
 
-export function addCardToPortfolio(id, cardId) {
-  return {
-    type: actionTypes.PORTFOLIOS_ADD_CARD_TO_PORTFOLIO,
-    id: id,
-    cardId: cardId
-  };
-}
+    const graphQLString = `
+      mutation createPortfolio($name: String!) {
+        createPortfolio(name: $name) {
+          id name
+        }
+      }
+    `;
 
-export function removeCardFromPortfolio(id, cardId) {
-  return {
-    type: actionTypes.PORTFOLIOS_REMOVE_CARD_FROM_PORTFOLIO,
-    id: id,
-    cardId: cardId
+    const variables = {
+      name: name
+    };
+
+    return graphQLRequest(graphQLString, variables)
+      .then((json) => {
+        if (json.errors) {
+          dispatch(createPortfolioErrors(json.errors));
+        } else {
+          dispatch(createPortfolioSuccess(json.data));
+        }
+      });
   };
 }

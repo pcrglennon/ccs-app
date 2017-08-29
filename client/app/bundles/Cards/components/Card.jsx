@@ -16,9 +16,9 @@ class Card extends React.Component {
   // TODO - should probably be moved to own component!
   // And refactored
   selectToggleClassName() {
-    if (this.props.inSelectedPortfolio && !this.props.portfolioManagingCards) {
+    if (this.inSelectedPortfolio && !this.props.portfolioManagingCards) {
       return `${styles.selectToggleSelectedLocked}`;
-    } else if (this.props.inSelectedPortfolio && this.props.portfolioManagingCards) {
+    } else if (this.inSelectedPortfolio && this.props.portfolioManagingCards) {
       return `${styles.selectToggleSelected}`;
     } else {
       return `${styles.selectToggleNotSelected}`;
@@ -30,11 +30,15 @@ class Card extends React.Component {
     // Only allow toggling when Portfolio is in "managing cards" state
     if (this.props.selectedPortfolioId.length === 0 || !this.props.portfolioManagingCards) { return; }
 
-    if (this.props.inSelectedPortfolio) {
-      this.props.removeCardFromPortfolio(this.props.selectedPortfolioId);
+    if (this.inSelectedPortfolio) {
+      this.props.removeCardFromPortfolio(this.props.cardsPortfolio.id);
     } else {
       this.props.addCardToPortfolio(this.props.selectedPortfolioId);
     }
+  }
+
+  get inSelectedPortfolio() {
+    return !!this.props.cardsPortfolio;
   }
 
   // TODO - should probably be moved to own component!
@@ -126,7 +130,6 @@ class Card extends React.Component {
 
 Card.propTypes = {
   name: PropTypes.string.isRequired,
-  inSelectedPortfolio: PropTypes.bool.isRequired,
   bank: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
@@ -143,6 +146,9 @@ Card.propTypes = {
   }),
   selectedPortfolioId: PropTypes.string.isRequired,
   portfolioManagingCards: PropTypes.bool.isRequired,
+  cardsPortfolio: PropTypes.shape({
+    id: PropTypes.string.isRequired
+  }),
   addCardToPortfolio: PropTypes.func.isRequired,
   removeCardFromPortfolio: PropTypes.func.isRequired
 };

@@ -4,12 +4,16 @@ import applyCardFilters from '../utils/applyCardFilters';
 import CardsList from '../components/CardsList';
 
 function mapStateToProps(state) {
-  // REFACTOR
   let filteredCards = applyCardFilters(state.filtersStore, Object.values(state.cardsStore.byId));
 
   if (state.portfoliosStore.selectedId.length && !state.portfoliosStore.managingCards) {
+    // Ick, figure out how to refactor (Selectors?)
     const selectedPortfolio = state.portfoliosStore.byId[state.portfoliosStore.selectedId];
-    filteredCards = filteredCards.filter(card => selectedPortfolio.cardIds.indexOf(card.id) > - 1);
+    const portfolioCardIds = Object.values(state.cardsPortfoliosStore.byId)
+      .filter(cardsPortfolio => cardsPortfolio.portfolioId === selectedPortfolio.id)
+      .map(cardsPortfolio => cardsPortfolio.cardId);
+
+    filteredCards = filteredCards.filter(card => portfolioCardIds.indexOf(card.id) > - 1);
   }
 
   return {

@@ -7,8 +7,7 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
 
     context = {
-      # No context necessary (for now)
-      # current_user: current_user
+      current_user: current_user
     }
 
     result = BackendSchema.execute(
