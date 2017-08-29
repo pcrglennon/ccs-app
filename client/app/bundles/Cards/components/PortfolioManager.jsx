@@ -12,6 +12,7 @@ class PortfolioManager extends React.Component {
     };
 
     this.handleSelectedPortfolioIdChange = this.handleSelectedPortfolioIdChange.bind(this);
+    this.handleSelectedPortfolioDestroyClick = this.handleSelectedPortfolioDestroyClick.bind(this);
     this.handleNewPortfolioNameChange = this.handleNewPortfolioNameChange.bind(this);
     this.handleManagingCardsToggleClick = this.handleManagingCardsToggleClick.bind(this);
     this.handleCreateClick = this.handleCreateClick.bind(this);
@@ -19,6 +20,12 @@ class PortfolioManager extends React.Component {
 
   handleSelectedPortfolioIdChange(event) {
     this.props.setSelectedPortfolioId(event.target.value);
+  }
+
+  handleSelectedPortfolioDestroyClick(_event) {
+    if (confirm('Are you sure you want to delete this Portfolio?')) {
+      this.props.destroyPortfolio(this.props.selectedPortfolioId);
+    }
   }
 
   handleNewPortfolioNameChange(event) {
@@ -84,6 +91,14 @@ class PortfolioManager extends React.Component {
           className={styles.button}
         >
           {this.managingCardsToggleText}
+        </button>
+
+        <button
+          onClick={this.handleSelectedPortfolioDestroyClick}
+          disabled={!this.isSelectedPortfolioIdValid}
+          className={styles.destroyButton}
+        >
+          Delete
         </button>
 
         <div className={styles.create}>

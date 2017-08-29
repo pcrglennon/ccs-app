@@ -16,6 +16,11 @@ function byId(state = {}, action) {
         [portfolio.id]: portfolio
       });
     }
+    case actionTypes.PORTFOLIOS_DESTROY_SUCCESS: {
+      const newState = Object.assign({}, state);
+      delete newState[portfolio.id];
+      return newState;
+    }
     default:
       return state;
   }
@@ -29,6 +34,8 @@ function selectedId(state = '', action) {
       return id;
     case actionTypes.PORTFOLIOS_CREATE_SUCCESS:
       return portfolio.id;
+    case actionTypes.PORTFOLIOS_DESTROY_SUCCESS:
+      return '';
     default:
       return state;
   }
@@ -44,6 +51,8 @@ function managingCards(state = false, action) {
       return false;
     case actionTypes.PORTFOLIOS_CREATE_SUCCESS:
       return true;
+    case actionTypes.PORTFOLIOS_DESTROY_SUCCESS:
+      return false;
     default:
       return state;
   }

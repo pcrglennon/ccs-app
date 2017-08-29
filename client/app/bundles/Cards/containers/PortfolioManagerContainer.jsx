@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 
-import { setSelectedPortfolioId, toggleManagingPortfolioCards, createPortfolio } from '../actions/portfoliosActions';
+import {
+  createPortfolio,
+  destroyPortfolio,
+  setSelectedPortfolioId,
+  toggleManagingPortfolioCards
+} from '../actions/portfoliosActions';
 import PortfolioManager from '../components/PortfolioManager';
 
 function mapStateToProps(state, props) {
@@ -13,14 +18,17 @@ function mapStateToProps(state, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setSelectedPortfolioId: (portfolioId) => {
-      dispatch(setSelectedPortfolioId(portfolioId));
+    setSelectedPortfolioId: (id) => {
+      dispatch(setSelectedPortfolioId(id));
     },
     toggleManagingPortfolioCards: (toggleValue) => {
       dispatch(toggleManagingPortfolioCards(toggleValue));
     },
-    createPortfolio: (portfolioName) => {
-      dispatch(createPortfolio(portfolioName));
+    createPortfolio: (name) => {
+      dispatch(createPortfolio(name));
+    },
+    destroyPortfolio: (id) => {
+      dispatch(destroyPortfolio(id));
     }
   };
 }

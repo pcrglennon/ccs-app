@@ -10,6 +10,15 @@ Types::MutationType = GraphQL::ObjectType.define do
     }
   end
 
+  field :destroyPortfolio do
+    description 'Destroy a Portfolio'
+    type Types::PortfolioType
+    argument :id, !types.ID
+    resolve -> (_obj, args, _ctx) {
+      Portfolio.find(args[:id]).destroy
+    }
+  end
+
   field :createCardsPortfolio do
     description 'Create a new CardsPortfolio'
     type Types::CardsPortfolioType

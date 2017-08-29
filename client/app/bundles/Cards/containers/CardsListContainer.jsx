@@ -13,7 +13,7 @@ function mapStateToProps(state) {
       .filter(cardsPortfolio => cardsPortfolio.portfolioId === selectedPortfolio.id)
       .map(cardsPortfolio => cardsPortfolio.cardId);
 
-    filteredCards = filteredCards.filter(card => portfolioCardIds.indexOf(card.id) > - 1);
+    filteredCards = filteredCards.filter(card => portfolioCardIds.indexOf(card.id) > -1);
   }
 
   return {

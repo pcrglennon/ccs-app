@@ -18,7 +18,7 @@
   padding: 10px 15px;
   margin-left: 20px;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: black;
     color: white;
   }
@@ -28,6 +28,18 @@
     border-color: lightgray;
     color: white;
     cursor: default;
+  }
+}
+
+.destroyButton {
+  composes: button;
+
+  background-color: black;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: red;
+    border-color: red;
   }
 }
 
