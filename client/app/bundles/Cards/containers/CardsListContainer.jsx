@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
-import applyCardFilters from '../utils/applyCardFilters';
+import { getFilteredCards } from '../selectors/cardsSelectors';
 import CardsList from '../components/CardsList';
 
 function mapStateToProps(state) {
-  let filteredCards = applyCardFilters(state.filtersStore, Object.values(state.cardsStore.byId));
+  let filteredCards = getFilteredCards(state);
 
+  // TODO - selector-ize!
   if (state.portfoliosStore.selectedId.length && !state.portfoliosStore.managingCards) {
-    // Ick, figure out how to refactor (Selectors?)
     const selectedPortfolio = state.portfoliosStore.byId[state.portfoliosStore.selectedId];
     const portfolioCardIds = Object.values(state.cardsPortfoliosStore.byId)
       .filter(cardsPortfolio => cardsPortfolio.portfolioId === selectedPortfolio.id)
