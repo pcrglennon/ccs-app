@@ -1,0 +1,9 @@
+.spendResult {
+  color: black;
+}
+
+.spendResultBest {
+  composes: spendResult;
+
+  color: green;
+}
