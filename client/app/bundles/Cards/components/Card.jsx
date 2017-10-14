@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 
 import styles from './styles/cards.scss';
 
-import CategorizedRewardContainer from '../containers/CategorizedRewardContainer';
-import UncategorizedRewardContainer from '../containers/UncategorizedRewardContainer';
+import RewardContainer from '../containers/RewardContainer';
 
 class Card extends React.Component {
   constructor(props) {
@@ -70,39 +69,23 @@ class Card extends React.Component {
     );
   }
 
-  renderCategorizedRewards() {
-    return this.props.categorizedRewards.map((reward) => {
-      return (
-        <CategorizedRewardContainer
-          key={reward.id}
-          {...reward}
-        />
-      );
-    });
-  }
-
-  renderUncategorizedReward() {
-    if (!this.props.uncategorizedReward) { return null; }
-
+  renderReward(reward) {
     return (
-      <UncategorizedRewardContainer
-        key={this.props.uncategorizedReward.id}
-        excludedSpendCategoryIds={this.props.categorizedRewards.map(reward => reward.spendCategoryId)}
-        {...this.props.uncategorizedReward}
+      <RewardContainer
+        key={reward.id}
+        {...reward}
       />
     );
   }
 
   renderRewards() {
-    if (this.props.categorizedRewards.length === 0 && !this.props.uncategorizedReward) {
+    if (this.props.rewards.length === 0) {
       return (<p>None!</p>);
     }
 
     return (
       <div className="rewards">
-        {this.renderCategorizedRewards()}
-
-        {this.renderUncategorizedReward()}
+        {this.props.rewards.map((reward) => this.renderReward(reward))}
       </div>
     );
   }
@@ -138,12 +121,9 @@ Card.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
   }).isRequired,
-  categorizedRewards: PropTypes.arrayOf(PropTypes.shape({
+  rewards: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired).isRequired,
-  uncategorizedReward: PropTypes.shape({
-    id: PropTypes.string.isRequired
-  }),
   selectedPortfolioId: PropTypes.string.isRequired,
   portfolioManagingCards: PropTypes.bool.isRequired,
   cardsPortfolio: PropTypes.shape({

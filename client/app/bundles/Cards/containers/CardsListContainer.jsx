@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { getFilteredCards } from '../selectors/cardsSelectors';
+import getFilteredCards from '../selectors/getFilteredCards';
 import CardsList from '../components/CardsList';
 
 function mapStateToProps(state) {

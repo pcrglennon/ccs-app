@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+// TODO - move Portfolio filtering into here!
+
 function applyPropertyFilters(propertyFilters, cards) {
   let filteredCards = cards;
 
@@ -18,7 +20,7 @@ const getPartialName = state => state.filtersStore.partialCardName;
 const getPropertyFilters = state => state.filtersStore.cardProperties;
 const getCards = state => Object.values(state.cardsStore.byId);
 
-export const getFilteredCards = createSelector(
+const getFilteredCards = createSelector(
   [getPartialName, getPropertyFilters, getCards],
   (partialName, propertyFilters, cards) => {
     let filteredCards = applyPropertyFilters(propertyFilters, cards);
@@ -31,3 +33,5 @@ export const getFilteredCards = createSelector(
     return filteredCards;
   }
 );
+
+export default getFilteredCards;

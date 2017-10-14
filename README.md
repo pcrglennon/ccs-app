@@ -11,11 +11,13 @@
     - Reorganize queries/mutations into separate files
     - Investigate removing Rails entirely, moving to tool like Graphcool?
   - React/Redux:
-    - Figure out Selectors
     - Apollo?
+    - Filter Cards by Portfolio as well, so selectors which make use of getFilteredCards can account for that too
+    - Sort rewards by SpendCategory type (categorized/uncategorized) & then name
     - Add PropTypes to Container components
     - Normalize Action type naming convention
     - Set up ESLint and refactor accordingly
+    - Establish naming convention for selectors w/o "filtered"
   - Webpack/general tooling
     - React CSS Modules plugin, to avoid camelCased CSS classes
     - Use `ExtractTextPlugin` to extract CSS into separate file

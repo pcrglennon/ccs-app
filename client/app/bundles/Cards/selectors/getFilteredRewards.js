@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
-import { getFilteredCards } from './cardsSelectors';
+import getFilteredCards from './getFilteredCards';
 
 const getRewards = state => Object.values(state.rewardsStore.byId);
 
-export const getFilteredRewards = createSelector(
+const getFilteredRewards = createSelector(
   [getFilteredCards, getRewards],
   (filteredCards, rewards) => {
     const filteredCardIds = filteredCards.map(card => card.id);
@@ -12,3 +12,5 @@ export const getFilteredRewards = createSelector(
     return rewards.filter(reward => filteredCardIds.indexOf(reward.cardId) > -1);
   }
 );
+
+export default getFilteredRewards;
